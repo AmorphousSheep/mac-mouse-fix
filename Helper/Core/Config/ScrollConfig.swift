@@ -267,6 +267,13 @@ import Cocoa
         return c("reverseDirection") as! Bool ? kMFScrollInversionInverted : kMFScrollInversionNonInverted
     }()
     
+    @objc lazy var u_invertHorizontalDirection: MFScrollInversion = {
+        let horizontal = c("reverseHorizontalDirection") as? Bool
+        let vertical = c("reverseDirection") as? Bool
+        let effective = horizontal ?? vertical ?? true
+        return effective ? kMFScrollInversionInverted : kMFScrollInversionNonInverted
+    }()
+    
     // MARK: Old Invert Direction
     /// Rationale: We used to have the user setting be "Natural Direction" but we changed it to being "Reverse Direction". This is so it's more transparent to the user when Mac Mouse Fix is intercepting the scroll input and also to have the SwitchMaster more easily decide when to turn the scrolling tap on or off. Also I think the setting is slightly more intuitive this way.
     

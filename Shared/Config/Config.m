@@ -572,6 +572,23 @@ NSDictionary *_Nullable _readDictPlist(NSURL *url, bool mutable, NSError * __aut
                     
                     currentVersion = 24;
                     
+                } else if (currentVersion == 24) {
+                    
+                    /// 24 -> 25
+                    ///     (25 is used for adding a dedicated horizontal scroll direction toggle)
+                    
+                    log(Info, "Upgrading configVersion from 24 to 25...");
+                    
+                    NSObject *reverse = config(@"Scroll.reverseDirection");
+                    NSObject *defaultHorizontal = [defaultConfig objectForCoolKeyPath:@"Scroll.reverseHorizontalDirection"];
+                    NSObject *horizontal = reverse ?: defaultHorizontal;
+                    if (horizontal == nil) {
+                        horizontal = @(YES);
+                    }
+                    setConfig(@"Scroll.reverseHorizontalDirection", horizontal);
+                    
+                    currentVersion = 25;
+                    
                 } else {
                     
                     log(Info, "No upgrades from configVersion %d. Target is %d.", currentVersion, targetVersion);

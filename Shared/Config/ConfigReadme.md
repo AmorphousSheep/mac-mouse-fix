@@ -17,3 +17,7 @@ Here, we document, what exactly changed as we increased the configVersion
 
 
     Update: [Jun 7 2025] ... Oup we forgot to ever update this. It's probably better to keep comments like these local to the updating code. 
+
+**24 -> 25**
+
+- Added `Scroll.reverseHorizontalDirection` so horizontal scroll direction can be toggled independently. During upgrade it copies the previous `Scroll.reverseDirection` value to preserve behavior.
